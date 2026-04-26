@@ -72,6 +72,7 @@ class LyricsWindow(QWidget):
         self._close_hovered: bool = False
         self._workers: List = []
         self._bg_tint = random.choice(_PALETTE)
+        self._last_track_info = None   # TrackInfo of the currently-playing track
 
         # ── position interpolation state ──────────────────────────────────────
         # The poll timer updates these every 500ms; the render timer uses them
@@ -186,11 +187,24 @@ class LyricsWindow(QWidget):
         except Exception:
             pass
 
+    def _log_current_play(self) -> None:
+        info = self._last_track_info
+        if info is None:
+            return
+        self._last_track_info = None
+        try:
+            from ..history import log_play
+            log_play(info.title, info.artist, info.album, info.genre,
+                     info.duration, self._play_pos)
+        except Exception:
+            pass
+
     def _do_poll(self) -> None:
         track = self._monitor.get_current_track()
 
         if track is None:
             if self._is_playing or self._lines:
+                self._log_current_play()
                 self._is_playing = False
                 self._lines      = []
                 self._current_idx = -1
@@ -209,7 +223,9 @@ class LyricsWindow(QWidget):
             return   # nothing structural changed
 
         # ── new track ─────────────────────────────────────────────────────
+        self._log_current_play()
         self._last_track_id   = track.track_id
+        self._last_track_info = track
         self._lines           = []
         self._current_idx     = -1
         self._anim_progress   = 1.0

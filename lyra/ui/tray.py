@@ -38,6 +38,9 @@ class TrayIcon(QSystemTrayIcon):
         theme_menu.addAction("Light").triggered.connect(lambda: self._set_theme("light"))
         menu.addSeparator()
 
+        menu.addAction("Stats").triggered.connect(self._show_stats)
+        menu.addSeparator()
+
         menu.addAction("Quit").triggered.connect(QApplication.quit)
         self.setContextMenu(menu)
         self.show()
@@ -57,3 +60,8 @@ class TrayIcon(QSystemTrayIcon):
         self._window._config.theme = theme
         self._window._config.save()
         self._window.update()
+
+    def _show_stats(self) -> None:
+        from .stats_dialog import StatsDialog
+        dlg = StatsDialog()
+        dlg.exec()

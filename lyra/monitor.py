@@ -11,12 +11,17 @@ tell application "Music"
         set al to album of current track
         set pos to player position
         set dur to duration of current track
+        try
+            set gen to genre of current track
+        on error
+            set gen to ""
+        end try
         if player state is playing then
             set stateStr to "playing"
         else
             set stateStr to "paused"
         end if
-        return t & nl & ar & nl & al & nl & (pos as string) & nl & (dur as string) & nl & stateStr
+        return t & nl & ar & nl & al & nl & (pos as string) & nl & (dur as string) & nl & stateStr & nl & gen
     else
         return "stopped"
     end if
@@ -32,6 +37,7 @@ class TrackInfo:
     position: float   # seconds
     duration: float   # seconds
     is_playing: bool
+    genre: str = ""
 
     @property
     def track_id(self) -> str:
@@ -60,6 +66,7 @@ class MusicMonitor:
                 position=max(0.0, float(parts[3])),
                 duration=max(1.0, float(parts[4])),
                 is_playing=(parts[5].strip() == "playing"),
+                genre=parts[6].strip() if len(parts) > 6 else "",
             )
         except Exception:
             return None
