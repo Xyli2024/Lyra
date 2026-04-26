@@ -57,8 +57,8 @@ class MusicMonitor:
                 title=parts[0],
                 artist=parts[1],
                 album=parts[2],
-                position=float(parts[3]),
-                duration=float(parts[4]),
+                position=max(0.0, float(parts[3])),
+                duration=max(1.0, float(parts[4])),
                 is_playing=(parts[5].strip() == "playing"),
             )
         except Exception:

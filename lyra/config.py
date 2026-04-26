@@ -2,17 +2,17 @@ import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-_CONFIG_PATH = Path.home() / ".config" / "apple-lyrics" / "config.json"
+_CONFIG_PATH = Path.home() / ".config" / "lyra" / "config.json"
 
 
 @dataclass
 class Config:
     window_x: int = -1          # -1 = auto-center
     window_y: int = -1
-    window_width: int = 520
-    font_size: int = 22
-    opacity: float = 0.82
-    theme: str = "dark"         # "dark" | "light"
+    window_width: int = 680
+    font_size: int = 26
+    opacity: float = 0.52
+    theme: str = "light"        # "dark" | "light"
 
     def save(self) -> None:
         _CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)

@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-_CACHE_DIR = Path.home() / ".cache" / "apple-lyrics"
+_CACHE_DIR = Path.home() / ".cache" / "lyra"
 _TTL_SECONDS = 30 * 24 * 3600  # 30 days
 
 

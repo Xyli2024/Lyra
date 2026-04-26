@@ -3,7 +3,7 @@ import requests
 from .base import LyricsResult, LyricsSource
 
 _BASE = "https://lrclib.net/api"
-_HEADERS = {"User-Agent": "apple-lyrics/0.1 (https://github.com/yourusername/apple-lyrics)"}
+_HEADERS = {"User-Agent": "lyra/0.1 (https://github.com/Xyli2024/lyra)"}
 _TIMEOUT = 6
 
 

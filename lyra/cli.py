@@ -1,6 +1,6 @@
 """
 CLI lyrics display for Apple Music.
-Usage: python -m apple_lyrics
+Usage: python -m lyra
 """
 import time
 from typing import List, Optional, Tuple
@@ -101,7 +101,7 @@ def run() -> None:
     fetching_msg: Optional[str] = None
 
     _console.print(
-        "\n[bold cyan]apple-lyrics[/] — [dim]Ctrl+C to quit[/]\n"
+        "\n[bold cyan]lyra[/] — [dim]Ctrl+C to quit[/]\n"
     )
 
     with Live(console=_console, refresh_per_second=int(1 / POLL_INTERVAL)) as live:

@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 a = Analysis(
-    ["apple_lyrics/__main__.py"],
+    ["lyra/__main__.py"],
     pathex=[],
     binaries=[],
     datas=[],
@@ -30,7 +30,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name="apple-lyrics",
+    name="lyra",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -49,21 +49,21 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=False,
-    name="apple-lyrics",
+    name="lyra",
 )
 
 app = BUNDLE(
     coll,
-    name="Apple Lyrics.app",
+    name="Lyra.app",
     icon="assets/icon.icns",
-    bundle_identifier="com.xinyuli.apple-lyrics",
+    bundle_identifier="com.xinyuli.lyra",
     info_plist={
-        "CFBundleName": "Apple Lyrics",
-        "CFBundleDisplayName": "Apple Lyrics",
+        "CFBundleName": "Lyra",
+        "CFBundleDisplayName": "Lyra",
         "CFBundleShortVersionString": "0.1.0",
         "CFBundleVersion": "1",
         "LSUIElement": True,           # menu-bar only, no Dock icon
         "NSHighResolutionCapable": True,
-        "NSAppleEventsUsageDescription": "Apple Lyrics needs to read the current track from Music.app.",
+        "NSAppleEventsUsageDescription": "Lyra needs to read the current track from Music.app.",
     },
 )

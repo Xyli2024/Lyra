@@ -26,7 +26,7 @@ class TrayIcon(QSystemTrayIcon):
     def __init__(self, window, parent=None) -> None:
         super().__init__(_make_icon(), parent)
         self._window = window
-        self.setToolTip("apple-lyrics")
+        self.setToolTip("lyra")
 
         menu = QMenu()
         self._vis_action = menu.addAction("Hide Lyrics")
@@ -48,6 +48,9 @@ class TrayIcon(QSystemTrayIcon):
             self._vis_action.setText("Show Lyrics")
         else:
             self._window.show()
+            self._window.raise_()
+            # Re-apply native on-top level after re-show
+            self._window._apply_native_ontop()
             self._vis_action.setText("Hide Lyrics")
 
     def _set_theme(self, theme: str) -> None:

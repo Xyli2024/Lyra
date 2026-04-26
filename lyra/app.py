@@ -10,7 +10,7 @@ from .ui.window import LyricsWindow
 def run_gui() -> None:
     app = QApplication(sys.argv)
     app.setQuitOnLastWindowClosed(False)   # keep alive when window is hidden
-    app.setApplicationName("apple-lyrics")
+    app.setApplicationName("lyra")
 
     config = Config.load()
     window = LyricsWindow(config)
