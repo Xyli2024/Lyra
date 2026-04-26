@@ -126,7 +126,7 @@ def run() -> None:
             if track.track_id != last_track_id:
                 last_track_id = track.track_id
                 lines = []
-                fetching_msg = f"Fetching lyrics for "{track.title}"…"
+                fetching_msg = f'Fetching lyrics for "{track.title}"…'
                 live.update(
                     Panel(
                         Align.center(
