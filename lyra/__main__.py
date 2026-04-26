@@ -10,6 +10,9 @@ def main() -> None:
             pass
     elif "--stats" in sys.argv:
         _print_stats()
+    elif "--daemon" in sys.argv:
+        from .daemon import run as run_daemon
+        run_daemon()
     else:
         from .app import run_gui
         run_gui()

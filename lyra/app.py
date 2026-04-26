@@ -18,4 +18,6 @@ def run_gui() -> None:
 
     tray = TrayIcon(window)   # noqa: F841 — must stay alive
 
+    app.aboutToQuit.connect(window._log_current_play)
+
     sys.exit(app.exec())

@@ -31,12 +31,23 @@ def _open() -> sqlite3.Connection:
     return conn
 
 
+_DEDUP_WINDOW_S = 300.0   # suppress duplicate entries within 5 minutes
+
+
 def log_play(title: str, artist: str, album: str, genre: str,
              duration: float, played_s: float) -> None:
+    """Record a play. Safe to call from both GUI and daemon simultaneously —
+    duplicates within _DEDUP_WINDOW_S are silently dropped."""
     if played_s < _MIN_PLAYED_S:
         return
     try:
         with _open() as conn:
+            recent = conn.execute(
+                "SELECT 1 FROM plays WHERE title=? AND artist=? AND ts>? LIMIT 1",
+                (title, artist, time.time() - _DEDUP_WINDOW_S),
+            ).fetchone()
+            if recent:
+                return
             conn.execute(
                 "INSERT INTO plays (ts, title, artist, album, genre, duration, played_s) "
                 "VALUES (?, ?, ?, ?, ?, ?, ?)",
