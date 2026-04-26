@@ -1,4 +1,4 @@
-# Lyra 天琴座
+# Lyra 
 
 Real-time lyrics overlay for Apple Music on macOS.
 
